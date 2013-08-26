@@ -12,28 +12,27 @@ window.onload = function () {
         return request;
     }
 
-    function sortList(ul, sortDescending) {
-        if (typeof ul == "string")
+    function sortUnorderedList(ul, sortDescending) {
+        if (typeof ul == "string") {
             ul = document.getElementById(ul);
-
-        if (!ul) {
-            alert("The UL object is null!");
-            return;
         }
 
         var lis = ul.getElementsByTagName("LI");
         var vals = [];
 
-        for (var k = 0, n = lis.length; k < n; k++)
-            vals.push(lis[k].innerHTML);
+        for (var i = 0, l = lis.length; i < l; i++) {
+            vals.push(lis[i].innerHTML);
+        }
 
         vals.sort();
 
-        if (sortDescending)
+        if (sortDescending) {
             vals.reverse();
+        }
 
-        for (var index = 0, length = lis.length; index < length; index++)
-            lis[index].innerHTML = vals[index];
+        for (var i = 0, l = lis.length; i < l; i++) {
+            lis[i].innerHTML = vals[i];
+        }
     }
 
     function getJSON() {
@@ -54,6 +53,7 @@ window.onload = function () {
                 function appendChildElements() {
                     ulElement.appendChild(liElement);
                     liElement.appendChild(link);
+                    liElement.className = "listElement";
                     liElement.appendChild(description);
                     liElement.appendChild(tags);
                 }
@@ -89,18 +89,19 @@ window.onload = function () {
 
                         var position = parsedJSON.items[i].tags.indexOf("object");
                         if (position === 0) {
-                            link.style.color = "blue";
+                            //link.style.color = "blue";
                         } else {
-                            link.style.color = "gray";
-                        }
-
-                        var desc = false;
-                        document.getElementById("list").onclick = function () {
-                            sortList("list", desc);
-                            desc = !desc;
-                            return false;
+                           // link.style.color = "gray";
                         }
                     }
+
+                    var list = document.getElementById("list");
+                    var descending = false;
+                    list.onclick = function () {
+                        sortUnorderedList("list", descending);
+                        descending = !descending;
+                        return false;
+                    };
                 }
             };
         }
