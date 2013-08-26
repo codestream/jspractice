@@ -89,9 +89,9 @@ window.onload = function () {
 
                         var position = parsedJSON.items[i].tags.indexOf("object");
                         if (position === 0) {
-                            link.style.culor = "blue";
+                            link.style.color = "blue";
                         } else {
-                            link.style.culor = "gray";
+                            link.style.color = "gray";
                         }
 
                         var desc = false;
