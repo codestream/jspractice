@@ -73,7 +73,7 @@ window.onload = function () {
                     var ulElement = document.createElement("ul");
                     ulElement.setAttribute("id", "list");
                     document.body.appendChild(ulElement);
-                    //create ordered list
+                    //create unordered list
                     for (var i = 0; i < parsedJSON.items.length; i++) {
                         var __ret = createDOMElements();
                         var liElement = __ret.liElement;
