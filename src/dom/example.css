@@ -1,0 +1,13 @@
+li {
+    margin-top: 10px;
+    list-style: decimal;
+}
+
+p {
+    margin-top: 0;
+}
+
+.tags {
+    float: right;
+    margin-top: -2em;
+}

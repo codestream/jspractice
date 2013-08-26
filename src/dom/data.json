@@ -1,0 +1,49 @@
+{
+    "items": [
+        {
+            "url": "http://javascript.info/tutorial/type-detection",
+            "description": "how to detect type of object. typeof, instanceof",
+            "tags": ["object", "types"]
+        },
+        {
+            "url": "http://bonsaiden.github.io/JavaScript-Garden/#types",
+            "description": "Type detection",
+            "tags": ["object", "types"]
+        },
+        {
+            "url": "http://www.jspatterns.com/classical-inheritance/",
+            "description": "Classical inheritance example, build on top of prototyping.",
+            "tags": ["object", "inheritance", "prototype"]
+        },
+        {
+            "url": "http://dmitrysoshnikov.com/ecmascript/javascript-the-core/",
+            "description": "Very detailed description on how javascript core works. ",
+            "tags": ["core", "javascript"]
+        },
+        {
+            "url": "http://thc.org/root/phun/unmaintain.html",
+            "description": "how to write unmaintainable code. Examples are not in javascript, never the less, very useful general programming article",
+            "tags": ["programming", "code"]
+        },
+        {
+            "url": "http://lostechies.com/jimmybogard/2009/01/20/javascript-decorator-pattern/",
+            "description": "Decorating functions. This is the way to change function behavior, not touching its implementation",
+            "tags": ["inheritance", "function"]
+        },
+        {
+            "url": "http://dmitrysoshnikov.com/ecmascript/chapter-5-functions/",
+            "description": "Functions in details",
+            "tags": ["function"]
+        },
+        {
+            "url": "http://dmitrysoshnikov.com/ecmascript/chapter-4-scope-chain/",
+            "description": "Scope chain",
+            "tags": ["function", "variable", "closure"]
+        },
+        {
+            "url": "http://dmitrysoshnikov.com/ecmascript/chapter-3-this/",
+            "description": "What is 'this' in functions",
+            "tags": ["function", "inheritance"]
+        }
+    ]
+}
