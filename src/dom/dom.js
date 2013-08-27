@@ -1,5 +1,10 @@
 window.onload = function () {
 
+    /**
+     * Gets ajax request. If IE > 7 request is XMLHttpRequest
+     * else ActiveXObject
+     * @returns {*} request
+     */
     function getAjaxRequest() {
         var request;
 
@@ -12,6 +17,11 @@ window.onload = function () {
         return request;
     }
 
+    /**
+     * Sorting unordered list
+     * @param ul tagName
+     * @param sortDescending descending or not
+     */
     function sortUnorderedList(ul, sortDescending) {
         if (typeof ul == "string") {
             ul = document.getElementById(ul);
@@ -35,6 +45,9 @@ window.onload = function () {
         }
     }
 
+    /**
+     * Get JSON from AJAX request and build dom using JSON data
+     */
     function getJSON() {
         var ajaxRequest = getAjaxRequest();
         if (ajaxRequest) {
