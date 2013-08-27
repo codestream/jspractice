@@ -1,27 +1,73 @@
 window.onload = function () {
 
-    /**
-     * Gets ajax request. If IE > 7 request is XMLHttpRequest
-     * else ActiveXObject
-     * @returns {*} request
-     */
     function getAjaxRequest() {
-        var request;
+        var ajaxRequest;
 
         if (window.XMLHttpRequest) {
-            request = new XMLHttpRequest();
+            ajaxRequest = new XMLHttpRequest();
         } else {
-            request = new ActiveXObject("Microsoft.XMLHTTP");
+            ajaxRequest = new ActiveXObject("Microsoft.XMLHTTP");
         }
 
-        return request;
+        return ajaxRequest;
     }
 
-    /**
-     * Sorting unordered list
-     * @param ul tagName
-     * @param sortDescending descending or not
-     */
+    function loadJSON() {
+        var request = getAjaxRequest();
+        request.open('get', "data.json");
+        request.onreadystatechange = function () {
+            if (request.readyState == 4) {
+                handleResponse(request);
+            }
+        };
+
+        request.send();
+    }
+
+    loadJSON();
+
+    function createDOMElements() {
+        var liElement = document.createElement("li");
+        var link = document.createElement("a");
+        var description = document.createElement("p");
+        var tags = document.createElement("p");
+        return {liElement: liElement, link: link, description: description, tags: tags};
+    }
+
+    function appendChildElements(ulElement, liElement, link, description, tags) {
+        ulElement.appendChild(liElement);
+        liElement.appendChild(link);
+        liElement.appendChild(description);
+        liElement.appendChild(tags);
+    }
+
+    function setTagElementsClass(tags) {
+        tags.className = "tags";
+    }
+
+    function buildDOM(link, parsedJSON, i, description, tags) {
+        link.href = parsedJSON.items[i].url;
+        link.innerHTML = parsedJSON.items[i].url;
+        link.innerHTML = link.innerHTML.replace(/((http|https)(:\/\/))/g, "");
+        description.innerHTML = parsedJSON.items[i].description;
+        tags.innerHTML = parsedJSON.items[i].tags;
+    }
+
+    function setLinkBackgroundColor(parsedJSON, i, link) {
+        var position = parsedJSON.items[i].tags.indexOf("object");
+        if (position === 0) {
+            link.style.backgroundColor = "#C2F5E7";
+        }
+        return position;
+    }
+
+    function createULElement() {
+        var ulElement = document.createElement("ul");
+        ulElement.setAttribute("id", "list");
+        document.body.appendChild(ulElement);
+        return ulElement;
+    }
+
     function sortUnorderedList(ul, sortDescending) {
         if (typeof ul == "string") {
             ul = document.getElementById(ul);
@@ -45,82 +91,39 @@ window.onload = function () {
         }
     }
 
-    /**
-     * Get JSON from AJAX request and build dom using JSON data
-     */
-    function getJSON() {
-        var ajaxRequest = getAjaxRequest();
-        if (ajaxRequest) {
-            ajaxRequest.open("GET", "data.json", true);
-            ajaxRequest.send();
-            ajaxRequest.onreadystatechange = function () {
-
-                function createDOMElements() {
-                    var liElement = document.createElement("li");
-                    var link = document.createElement("a");
-                    var description = document.createElement("p");
-                    var tags = document.createElement("p");
-                    return {liElement: liElement, link: link, description: description, tags: tags};
-                }
-
-                function appendChildElements() {
-                    ulElement.appendChild(liElement);
-                    liElement.appendChild(link);
-                    liElement.className = "listElement";
-                    liElement.appendChild(description);
-                    liElement.appendChild(tags);
-                }
-
-                function buildDOM() {
-                    link.href = parsedJSON.items[i].url;
-                    link.innerHTML = parsedJSON.items[i].url;
-                    link.innerHTML = link.innerHTML.replace(/((http|https)(:\/\/))/g, "");
-                    description.innerHTML = parsedJSON.items[i].description;
-                    tags.innerHTML = parsedJSON.items[i].tags;
-                }
-
-
-                if (ajaxRequest.readyState == 4) {
-                    var json = ajaxRequest.responseText;
-                    var parsedJSON = JSON.parse(json);
-                    var ulElement = document.createElement("ul");
-                    ulElement.setAttribute("id", "list");
-                    document.body.appendChild(ulElement);
-                    //create unordered list
-                    for (var i = 0; i < parsedJSON.items.length; i++) {
-                        var __ret = createDOMElements();
-                        var liElement = __ret.liElement;
-                        var link = __ret.link;
-                        var description = __ret.description;
-                        var tags = __ret.tags;
-
-                        appendChildElements();
-
-                        tags.className = "tags";
-
-                        buildDOM();
-
-                        var position = parsedJSON.items[i].tags.indexOf("object");
-                        if (position === 0) {
-                            link.style.backgroundColor = "#C2F5E7";
-                        }
-                    }
-
-                    var list = document.getElementById("list");
-                    var descending = false;
-                    list.onclick = function () {
-                        sortUnorderedList("list", descending);
-                        descending = !descending;
-                        return false;
-                    };
-                }
-            };
-        }
+    function sortListEvent() {
+        var list = document.getElementById("list");
+        var descending = false;
+        list.onclick = function () {
+            sortUnorderedList("list", descending);
+            descending = !descending;
+            return false;
+        };
     }
 
-    getJSON();
-};
+    function handleResponse(ajaxRequest) {
+        var json = ajaxRequest.responseText;
+        var parsedJSON = JSON.parse(json);
+        var ulElement = createULElement();
+        for (var i = 0; i < parsedJSON.items.length; i++) {
+            var elements = createDOMElements();
+            var liElement = elements.liElement;
+            var link = elements.link;
+            var description = elements.description;
+            var tags = elements.tags;
 
+            appendChildElements(ulElement, liElement, link, description, tags);
+
+            setTagElementsClass(tags);
+
+            buildDOM(link, parsedJSON, i, description, tags);
+
+            setLinkBackgroundColor(parsedJSON, i, link);
+        }
+
+        sortListEvent();
+    }
+};
 
 
 
