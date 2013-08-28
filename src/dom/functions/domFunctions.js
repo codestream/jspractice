@@ -2,16 +2,29 @@
 
 window.onload = function () {
     var div = document.createElement("div");
-    div.className = "lorem ipsum dolor sit amet consectetur adipisicing lorem ipsum";
+    div.className = "lorem ipsum dolor sit amet consectetur adipisicing lorem ipsum main-col lorem-ipsum";
     div.innerHTML = "It is test div";
     div.setAttribute("id", "testdiv");
     document.body.appendChild(div);
 
-    function removeClass(node, className) {
-        var element = document.getElementById(node.id);
-        element.classList.remove(className);
+    function isArray(obj) {
+        return Object.prototype.toString.call(obj) === '[object Array]';
     }
 
+    function removeClass(node, className) {
+        if (node !== undefined && className !== undefined) {
+            var cn = node.className;
+            var rxp = new RegExp('(\\s|^)' + className + '(\\s|$)', "g");
+            cn = cn.replace(rxp, " ");
+            node.className = cn;
+        }
+    }
+
+    function hasClass(node, className) {
+        return node.className.match(new RegExp('(\\s|^)' + className + '(\\s|$)', "g"));
+    }
+
+    //todo do it
     function addClass(node, className) {
         if (className !== "") {
             var classNode = node.className;
@@ -26,12 +39,11 @@ window.onload = function () {
 
             node.className = classNode + className;
         }
-
     }
 
-    addClass(div, "red-label"); //correct
-    addClass(div, "lorem"); //can't add
+    console.log(hasClass(div, "lorem-ipsum"));
     removeClass(div, "lorem"); //removed all classes with className lorem
+
 
     console.log(div.className);
 };
