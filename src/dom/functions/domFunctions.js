@@ -24,25 +24,19 @@ window.onload = function () {
         return node.className.match(new RegExp('(\\s|^)' + className + '(\\s|$)', "g"));
     }
 
-    //todo do it
     function addClass(node, className) {
-        if (className !== "") {
+        if(hasClass(node,className) == null){
             var classNode = node.className;
-
-            if (classNode.match(className)) {
-                return;
-            }
-
-            if (classNode != '') {
-                className = ' ' + className;
-            }
-
+            className = ' ' + className;
             node.className = classNode + className;
         }
     }
 
-    console.log(hasClass(div, "lorem-ipsum"));
+    addClass(div, "abs");
+
+    console.log(hasClass(div, "abs"));
     removeClass(div, "lorem"); //removed all classes with className lorem
+    removeClass(div, "lorem-ipsum");
 
 
     console.log(div.className);
