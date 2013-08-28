@@ -1,0 +1,15 @@
+/** classes for domFunctions.js **/
+div.test {
+    width : 10%;
+}
+
+.red .test {
+    color : #ff0000;
+}
+
+.text .red .test {
+    font-family: Arial;
+    font-size: 12px;
+    font-weight: 100;
+}
+
