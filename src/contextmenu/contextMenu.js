@@ -30,6 +30,7 @@ window.onload = function () {
 
     function handleRightClick() {
         var menu = document.getElementById("menu");
+        menu.style.display = "none";
         var submenu = document.getElementById("submenu");
         var submenu1 = document.getElementById("submenu1");
         var submenu2 = document.getElementById("submenu2");
