@@ -1,0 +1,28 @@
+.menu-context {
+    display: none;
+    background-color: ThreeDLightShadow;
+    width: 100px;
+    list-style: none;
+    padding: 3px;
+    position: absolute;
+    top: 20px;
+    left: 30px;
+    margin: 0;
+}
+
+.pointer {
+    background: url(http://i.piccy.info/i7/c675f07dcaa26b836532c514df0d412d/4-76-355/31686339/mark3.png) #E9E9E9 right top no-repeat;
+}
+
+.enabled {
+    display: block;
+}
+
+.shift {
+    margin-left: 73%;
+}
+
+li:hover {
+    background-color: #00bfff;
+    color: #ffffff;
+}
